@@ -7,10 +7,10 @@
 //Example
 const numbers = [1, 2, 3, 4, 5, 6];
 
-function customFilter(numbers, condition) {
+function customFilter(numbers, callback) {
   const evenNumbers = [];
   for (let i = 0; i < numbers.length; i++) {
-    if (condition(numbers[i])) evenNumbers.push(numbers[i]);
+    if (callback(numbers[i])) evenNumbers.push(numbers[i]);
   }
   return evenNumbers;
 }
