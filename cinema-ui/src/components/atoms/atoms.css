@@ -1,0 +1,14 @@
+.seat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: fit-content;
+}
+
+.seat-number {
+    margin: auto;
+}
+
+.seat-icon {
+    max-width: 75px;
+}
