@@ -5,7 +5,7 @@ export default function Seat() {
   return (
     <div className="seat">
       <p className="seat-number">A1</p>
-      <img className="seat-icon" src={seatImg} alt="seat" />
+      <div className="seat-icon-container seat-occuped"></div>
     </div>
   );
 }
