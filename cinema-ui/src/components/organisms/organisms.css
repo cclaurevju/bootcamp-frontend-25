@@ -1,0 +1,26 @@
+.room {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.room-number {
+    h2 {
+        margin: 10px 0px
+    }
+}
+
+.room-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 30/1;
+    background-color: grey;
+    width: 100%;
+    p {
+        margin: 0;
+        font-weight: bolder;
+        color: white;
+    }
+}
