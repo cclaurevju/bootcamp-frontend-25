@@ -48,6 +48,7 @@ export default function Container() {
           onClick={() => {
             setCity("");
             setHistory([]);
+            setData({});
           }}
         />
         <Button
@@ -58,6 +59,7 @@ export default function Container() {
         />
       </div>
       <ButtonsContainer history={history} search={search} />
+      <div>{JSON.stringify(data)}</div>
     </div>
   );
 }
