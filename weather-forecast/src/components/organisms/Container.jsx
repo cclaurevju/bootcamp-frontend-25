@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import Button from "../atoms/Button";
 import "./organisms.css";
+import ButtonsContainer from "./ButtonsContainer";
 
 const mockWeatherData = {
   "New York": {
@@ -43,13 +44,20 @@ export default function Container() {
           value={city}
         />
         <Button
+          label="Clear"
+          onClick={() => {
+            setCity("");
+            setHistory([]);
+          }}
+        />
+        <Button
           label="Search"
           onClick={() => {
             search(city);
           }}
         />
       </div>
-      <div></div>
+      <ButtonsContainer history={history} search={search} />
     </div>
   );
 }

@@ -1,7 +1,12 @@
 import "./App.css";
+import Container from "./components/organisms/Container";
 
 function App() {
-  return <>Hello world!</>;
+  return (
+    <>
+      <Container />
+    </>
+  );
 }
 
 export default App;
