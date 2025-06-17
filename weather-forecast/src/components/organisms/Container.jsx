@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import Button from "../atoms/Button";
 import "./organisms.css";
 import ButtonsContainer from "./ButtonsContainer";
+import DataDisplayer from "../atoms/DataDisplayer";
 
 const mockWeatherData = {
   "New York": {
@@ -26,13 +27,26 @@ export default function Container() {
   const [city, setCity] = useState("");
   const [data, setData] = useState({});
   const [history, setHistory] = useState([]);
+  const inputRef = useRef(null);
 
   const search = (inputCity) => {
-    const result = mockWeatherData[city];
+    const result = mockWeatherData[inputCity];
+
     if (result) {
       setData(result);
-      setHistory([...history, city]);
+      console.log(history);
+
+      if (!history.includes(inputCity)) {
+        setHistory((h) => [...h, inputCity]);
+      }
     }
+  };
+
+  const clear = () => {
+    setCity("");
+    setHistory([]);
+    setData({});
+    inputRef.current?.focus();
   };
 
   return (
@@ -42,15 +56,9 @@ export default function Container() {
           type="text"
           onChange={(e) => setCity(e.target.value)}
           value={city}
+          ref={inputRef}
         />
-        <Button
-          label="Clear"
-          onClick={() => {
-            setCity("");
-            setHistory([]);
-            setData({});
-          }}
-        />
+        <Button label="Clear" onClick={clear} />
         <Button
           label="Search"
           onClick={() => {
@@ -59,7 +67,9 @@ export default function Container() {
         />
       </div>
       <ButtonsContainer history={history} search={search} />
-      <div>{JSON.stringify(data)}</div>
+      <div>
+        <DataDisplayer data={data} />
+      </div>
     </div>
   );
 }
