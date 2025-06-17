@@ -24,7 +24,6 @@ const mockWeatherData = {
 };
 
 export default function Container() {
-  const [city, setCity] = useState("");
   const [data, setData] = useState({});
   const [history, setHistory] = useState([]);
   const inputRef = useRef(null);
@@ -34,8 +33,6 @@ export default function Container() {
 
     if (result) {
       setData(result);
-      console.log(history);
-
       if (!history.includes(inputCity)) {
         setHistory((h) => [...h, inputCity]);
       }
@@ -43,7 +40,7 @@ export default function Container() {
   };
 
   const clear = () => {
-    setCity("");
+    inputRef.current.value = "";
     setHistory([]);
     setData({});
     inputRef.current?.focus();
@@ -52,17 +49,12 @@ export default function Container() {
   return (
     <div>
       <div>
-        <input
-          type="text"
-          onChange={(e) => setCity(e.target.value)}
-          value={city}
-          ref={inputRef}
-        />
+        <input type="text" ref={inputRef} />
         <Button label="Clear" onClick={clear} />
         <Button
           label="Search"
           onClick={() => {
-            search(city);
+            search(inputRef.current?.value);
           }}
         />
       </div>
