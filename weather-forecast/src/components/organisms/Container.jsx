@@ -36,7 +36,7 @@ export default function Container() {
       if (!history.includes(inputCity)) {
         setHistory((h) => [...h, inputCity]);
       }
-    }
+    } else alert("City not found");
   };
 
   const clear = () => {
