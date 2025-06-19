@@ -1,3 +1,5 @@
+import "./atoms.css";
+
 export default function Checkbox({ label, checked, onChange, id }) {
   return (
     <div>
