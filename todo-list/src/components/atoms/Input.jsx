@@ -1,3 +1,3 @@
-export default function Input() {
-  return <div>Input</div>;
+export default function Input({ ref, placeholder }) {
+  return <input ref={ref} placeholder={placeholder} />;
 }
