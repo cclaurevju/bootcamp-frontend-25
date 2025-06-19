@@ -2,6 +2,7 @@ import Task from "../molecules/Task";
 import "./organisms.css";
 
 export default function TaskList({
+  inputRef,
   tasksArray = [],
   setTasksArray = () => {},
 }) {
@@ -27,7 +28,10 @@ export default function TaskList({
     );
   };
 
-  const EditTask = () => {};
+  const editTask = (id, task) => {
+    inputRef.current.id = id;
+    inputRef.current.value = task.name;
+  };
 
   return (
     <div>
@@ -36,6 +40,9 @@ export default function TaskList({
           <Task
             key={id}
             task={task}
+            editTask={() => {
+              editTask(id, task);
+            }}
             deleteTask={() => {
               deleteTask(id);
             }}

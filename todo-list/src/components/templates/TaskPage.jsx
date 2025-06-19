@@ -1,7 +1,7 @@
 import TaskForm from "../molecules/TaskForm";
 import TaskList from "../organisms/TaskList";
 import "./templates.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 // task = {
 //   name: String,
@@ -20,23 +20,42 @@ const mockTasks = [
 ];
 
 export default function TaskPage() {
+  const inputRef = useRef({ id: "" });
   const [tasks, setTasks] = useState(mockTasks);
+  // const [currentTaskId, setCurrentTaskId] = useState(null);
 
   const addTask = (name) => {
-    setTasks([
-      ...tasks,
-      {
-        name: name,
-        isChecked: false,
-      },
-    ]);
+    if (!inputRef.current.id) {
+      setTasks([
+        ...tasks,
+        {
+          name: name,
+          isChecked: false,
+        },
+      ]);
+    } else {
+      setTasks(
+        tasks.map((task, index) => {
+          if (index == inputRef.current.id) {
+            return {
+              name: inputRef.current.value,
+            };
+          }
+          return task;
+        })
+      );
+    }
   };
 
   return (
     <div>
       <h1>Prague itinerary</h1>
-      <TaskForm onSubmit={addTask} />
-      <TaskList tasksArray={tasks} setTasksArray={setTasks} />
+      <TaskForm inputRef={inputRef} onSubmit={addTask} />
+      <TaskList
+        inputRef={inputRef}
+        tasksArray={tasks}
+        setTasksArray={setTasks}
+      />
     </div>
   );
 }
