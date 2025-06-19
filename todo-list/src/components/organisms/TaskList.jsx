@@ -13,6 +13,20 @@ export default function TaskList({
     );
   };
 
+  const toggleTask = (id) => {
+    setTasksArray(
+      tasksArray.map((task, index) => {
+        if (index == id) {
+          return {
+            name: task.name,
+            isChecked: !task.isChecked,
+          };
+        }
+        return task;
+      })
+    );
+  };
+
   const EditTask = () => {};
 
   return (
@@ -24,6 +38,9 @@ export default function TaskList({
             task={task}
             deleteTask={() => {
               deleteTask(id);
+            }}
+            toggleTask={() => {
+              toggleTask(id);
             }}
           />
         );
