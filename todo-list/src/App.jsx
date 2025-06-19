@@ -1,7 +1,12 @@
 import "./App.css";
+import TaskPage from "./components/templates/TaskPage";
 
 function App() {
-  return <>Hello world!</>;
+  return (
+    <>
+      <TaskPage />
+    </>
+  );
 }
 
 export default App;

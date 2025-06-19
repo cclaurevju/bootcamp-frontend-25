@@ -1,3 +1,31 @@
+import TaskForm from "../molecules/TaskForm";
+import TaskList from "../organisms/TaskList";
+import "./templates.css";
+import { useState } from "react";
+
+// task = {
+//   name: String,
+//   isChecked: boolean
+// }
+
 export default function TaskPage() {
-  return <div>TaskPage</div>;
+  const [tasks, setTasks] = useState([]);
+
+  const addTask = (name) => {
+    setTasks([
+      ...tasks,
+      {
+        name: name,
+        isChecked: false,
+      },
+    ]);
+  };
+
+  return (
+    <div>
+      <h1>Prague itinerary</h1>
+      <TaskForm onSubmit={addTask} />
+      <TaskList tasksArray={tasks} setTasksArray={setTasks} />
+    </div>
+  );
 }

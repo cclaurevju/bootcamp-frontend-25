@@ -16,7 +16,7 @@ export default function TaskForm({ onSubmit = () => {} }) {
   return (
     <div>
       <Input ref={inputRef} placeholder={"Add task"} />
-      <Button onClick={addTask} />
+      <Button onClick={addTask}>Add</Button>
     </div>
   );
 }
