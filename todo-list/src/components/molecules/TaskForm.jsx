@@ -10,6 +10,8 @@ export default function TaskForm({ onSubmit = () => {} }) {
     const value = inputRef.current.value;
     if (value) {
       onSubmit(value);
+      inputRef.current.value = "";
+      inputRef.current.focus;
     }
   };
 
