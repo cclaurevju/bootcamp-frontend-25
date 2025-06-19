@@ -8,8 +8,19 @@ import { useState } from "react";
 //   isChecked: boolean
 // }
 
+const mockTasks = [
+  {
+    name: "First task",
+    isChecked: false,
+  },
+  {
+    name: "Second task",
+    isChecked: true,
+  },
+];
+
 export default function TaskPage() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(mockTasks);
 
   const addTask = (name) => {
     setTasks([

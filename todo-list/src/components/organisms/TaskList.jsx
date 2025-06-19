@@ -17,8 +17,16 @@ export default function TaskList({
 
   return (
     <div>
-      {tasksArray.map((task, i) => {
-        return <Task />;
+      {tasksArray.map((task, id) => {
+        return (
+          <Task
+            key={id}
+            task={task}
+            deleteTask={() => {
+              deleteTask(id);
+            }}
+          />
+        );
       })}
     </div>
   );

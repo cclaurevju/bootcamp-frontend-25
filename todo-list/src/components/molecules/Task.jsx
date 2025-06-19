@@ -8,7 +8,7 @@ export default function Task({
   deleteTask = () => {},
 }) {
   return (
-    <div>
+    <div className="task">
       <Checkbox label={task.name} />
       <Button onClick={() => editTask(task.id)}>Edit</Button>
       <Button onClick={() => deleteTask(task.id)}>Delete</Button>
