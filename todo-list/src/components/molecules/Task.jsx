@@ -2,7 +2,7 @@ import Button from "../atoms/Button";
 import Checkbox from "../atoms/Checkbox";
 import "./molecules.css";
 
-export default function Task() {
+export default function Task({ taskId }) {
   const editTask = () => {};
 
   const deleteTask = () => {};
