@@ -1,21 +1,14 @@
 import TaskForm from "../molecules/TaskForm";
 import TaskList from "../organisms/TaskList";
 import "./templates.css";
-import { useReducer, useRef, useState } from "react";
-
-// task = {
-//   name: String,
-//   isChecked: boolean
-// }
+import { useReducer, useRef } from "react";
 
 const mockTasks = [
   {
-    // id: 1,
     name: "First task",
     isChecked: false,
   },
   {
-    // id: 2,
     name: "Second task",
     isChecked: true,
   },
@@ -27,14 +20,13 @@ export default function TaskPage() {
   function handleAddTask(text) {
     dispatch({
       type: "added",
-      // id: nextId++,
       text: text,
     });
   }
 
   function handleChangeTask(task, id) {
     dispatch({
-      // id: id,
+      id: id,
       type: "changed",
       task: task,
     });
@@ -52,14 +44,15 @@ export default function TaskPage() {
       return [
         ...tasks,
         {
-          // id: action.id,
           name: action.text,
           isChecked: false,
         },
       ];
     } else if (action.type === "changed") {
+      console.log("ACTION", action);
+
       return tasks.map((t, index) => {
-        if (index === action.id) {
+        if (index == action.id) {
           return action.task;
         } else {
           return t;
@@ -73,19 +66,10 @@ export default function TaskPage() {
   }
 
   const inputRef = useRef({ id: "" });
-  // const [tasks, setTasks] = useState(mockTasks);
-  // const [currentTaskId, setCurrentTaskId] = useState(null);
 
   const addTask = (name) => {
     if (!inputRef.current.id) {
       handleAddTask(name);
-      // setTasks([
-      //   ...tasks,
-      //   {
-      //     name: name,
-      //     isChecked: false,
-      //   },
-      // ]);
     } else {
       const id = parseInt(inputRef.current.id);
       const currentTask = tasks[id];
@@ -94,20 +78,10 @@ export default function TaskPage() {
       handleChangeTask(
         {
           ...currentTask,
-          name: currentTask.name,
+          name: name,
         },
         id
       );
-      // setTasks(
-      //   tasks.map((task, index) => {
-      //     if (index == inputRef.current.id) {
-      //       return {
-      //         name: inputRef.current.value,
-      //       };
-      //     }
-      //     return task;
-      //   })
-      // );
     }
   };
 
@@ -118,7 +92,6 @@ export default function TaskPage() {
       <TaskList
         inputRef={inputRef}
         tasksArray={tasks}
-        // setTasksArray={setTasks}
         handleChangeTask={handleChangeTask}
         handleDeleteTask={handleDeleteTask}
       />

@@ -4,17 +4,11 @@ import "./organisms.css";
 export default function TaskList({
   inputRef,
   tasksArray = [],
-  setTasksArray = () => {},
   handleChangeTask = () => {},
   handleDeleteTask = () => {},
 }) {
   const deleteTask = (id) => {
     handleDeleteTask(id);
-    // setTasksArray(
-    //   tasksArray.filter((task, index) => {
-    //     return index != id;
-    //   })
-    // );
   };
 
   const toggleTask = (id) => {
@@ -26,17 +20,6 @@ export default function TaskList({
       },
       id
     );
-    // setTasksArray(
-    //   tasksArray.map((task, index) => {
-    //     if (index == id) {
-    //       return {
-    //         name: task.name,
-    //         isChecked: !task.isChecked,
-    //       };
-    //     }
-    //     return task;
-    //   })
-    // );
   };
 
   const editTask = (id, task) => {
