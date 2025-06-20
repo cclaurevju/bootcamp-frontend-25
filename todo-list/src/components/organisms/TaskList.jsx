@@ -5,27 +5,38 @@ export default function TaskList({
   inputRef,
   tasksArray = [],
   setTasksArray = () => {},
+  handleChangeTask = () => {},
+  handleDeleteTask = () => {},
 }) {
   const deleteTask = (id) => {
-    setTasksArray(
-      tasksArray.filter((task, index) => {
-        return index != id;
-      })
-    );
+    handleDeleteTask(id);
+    // setTasksArray(
+    //   tasksArray.filter((task, index) => {
+    //     return index != id;
+    //   })
+    // );
   };
 
   const toggleTask = (id) => {
-    setTasksArray(
-      tasksArray.map((task, index) => {
-        if (index == id) {
-          return {
-            name: task.name,
-            isChecked: !task.isChecked,
-          };
-        }
-        return task;
-      })
+    const task = tasksArray[id];
+    handleChangeTask(
+      {
+        ...task,
+        isChecked: !task.isChecked,
+      },
+      id
     );
+    // setTasksArray(
+    //   tasksArray.map((task, index) => {
+    //     if (index == id) {
+    //       return {
+    //         name: task.name,
+    //         isChecked: !task.isChecked,
+    //       };
+    //     }
+    //     return task;
+    //   })
+    // );
   };
 
   const editTask = (id, task) => {
