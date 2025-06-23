@@ -1,5 +1,5 @@
 /**
- * 
+ *
  * Your goal is to modify the application so that when you click the toggle button,
  * the favorite programming language toggles between the items in the languages array.
  * The default value should be the first item in the array.
@@ -12,23 +12,19 @@
  * Submit your code once it is complete.
  */
 
-const languages = ['JavaScript', 'Python'];
+import { useState } from "react";
+import { LanguageContext } from "./contexts/LanguageContext";
+import languages from "./assets/languages.json";
+import MainSection from "./components/molecules/MainSection";
 
 export default function App() {
- return (
-   <>
-     <MainSection />
-   </>
- );
+  const [languageIndex, setLanguageIndex] = useState(0);
+  const changeLanguage = () => {
+    setLanguageIndex((index) => (index == 1 ? 0 : 1));
+  };
+  return (
+    <LanguageContext.Provider value={languages[languageIndex]}>
+      <MainSection changeLanguage={changeLanguage} />
+    </LanguageContext.Provider>
+  );
 }
-
-
-function MainSection() {
- return (
-   <div>
-     <p id="favoriteLanguage">favorite programing language: {languages[0]}</p>
-     <button id="changeFavorite">toggle language</button>
-   </div>
- )
-}
-

@@ -1,4 +1,4 @@
-export default function Button({ onClick = () => {} }) {
+export default function Button({ onClick }) {
   return (
     <button id="changeFavorite" onClick={onClick}>
       toggle language
