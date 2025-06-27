@@ -38,11 +38,11 @@
 .cell {
     background-color: blueviolet;
     border-style: solid;
-    aspect-ratio: 2/5;
+    aspect-ratio: 3/5;
 }
 
 .card {
     background-color: purple;
     border-style: solid;
-    aspect-ratio: 2/4;
+    aspect-ratio: 4/6;
 }
