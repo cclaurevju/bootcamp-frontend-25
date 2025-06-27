@@ -2,12 +2,18 @@
     width: 100%;
     height: 100vh;
     background-color: beige;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .cell {
     background-color: blueviolet;
+    height: 50px;
+    width: 50px;
 }
 
 .card {
     background-color: purple;
+    height: 50px;
+    width: 50px;
 }
