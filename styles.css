@@ -13,14 +13,24 @@
 
 .center-container {
     width: 100%;
+    height: 100%;
     display: grid;
+    grid-template-rows: auto 10% auto;
+}
+
+.center-cell-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
 }
 
 .cell {
     background-color: blueviolet;
     border-style: solid;
-    height: 50px;
-    width: 50px;
+    /* height: 100%; */
+    /* width: 100%; */
 }
 
 .card {
