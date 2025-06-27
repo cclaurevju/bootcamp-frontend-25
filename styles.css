@@ -3,17 +3,29 @@
     height: 100vh;
     background-color: beige;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 20% auto 20%
+}
+
+.side-container {
+    width: 100%;
+    display: grid;
+}
+
+.center-container {
+    width: 100%;
+    display: grid;
 }
 
 .cell {
     background-color: blueviolet;
+    border-style: solid;
     height: 50px;
     width: 50px;
 }
 
 .card {
     background-color: purple;
+    border-style: solid;
     height: 50px;
     width: 50px;
 }
