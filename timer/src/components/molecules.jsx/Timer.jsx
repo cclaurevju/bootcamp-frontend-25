@@ -1,6 +1,6 @@
 import TimeDisplay from "../atoms/TimeDisplay";
 import Button from "../atoms/Button";
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useRef } from "react";
 
 const timeReducer = (state, action) => {
   console.log(state, action);
@@ -14,6 +14,7 @@ const timeReducer = (state, action) => {
       mins: state.secs + 1 == 60 ? state.mins + 1 : state.mins,
       secs: state.secs + 1 == 60 ? 0 : state.secs + 1,
     };
+
   if (action == "reset") return { mins: 0, secs: 0, isActive: false };
 };
 
@@ -24,12 +25,16 @@ export default function Timer() {
     isActive: false,
   });
 
+  const intervalRef = useRef(null);
+
   useEffect(() => {
     if (state.isActive)
-      setInterval(() => {
+      intervalRef.current = setInterval(() => {
         console.log("tick");
         dispatch("tick");
       }, 1000);
+    else clearInterval(intervalRef.current);
+    return () => clearInterval(intervalRef.current);
   }, [state.isActive]);
 
   return (
@@ -38,7 +43,7 @@ export default function Timer() {
       <div>
         <div className="time-display-list">
           <TimeDisplay number={state.mins} label={"mins"} />
-          <TimeDisplay number={state.secs} label={"mins"} />
+          <TimeDisplay number={state.secs} label={"secs"} />
         </div>
         <div>
           <Button
