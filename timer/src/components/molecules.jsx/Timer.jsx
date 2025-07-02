@@ -3,7 +3,6 @@ import Button from "../atoms/Button";
 import { useEffect, useReducer, useRef } from "react";
 
 const timeReducer = (state, action) => {
-  console.log(state, action);
   if (action == "start") {
     return { ...state, isActive: true };
   }
@@ -30,7 +29,6 @@ export default function Timer() {
   useEffect(() => {
     if (state.isActive)
       intervalRef.current = setInterval(() => {
-        console.log("tick");
         dispatch("tick");
       }, 1000);
     else clearInterval(intervalRef.current);
