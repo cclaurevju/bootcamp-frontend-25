@@ -1,3 +1,3 @@
 export default function Button({ onClick = () => {}, children }) {
-  return <button>{children}</button>;
+  return <button onClick={onClick}>{children}</button>;
 }
