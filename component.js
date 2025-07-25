@@ -34,7 +34,9 @@ class IdCard extends HTMLElement {
     const photo = document.createElement("img");
     photo.src = "static/photo.png";
     photo.style.overflow = "hidden";
-    photo.style.borderRadius = "20px";
+    photo.style.borderRadius = "10%";
+    photo.style.aspectRatio = "9/10";
+    photo.style.width = "70%";
     body.appendChild(photo);
 
     const name = document.createElement("div");
