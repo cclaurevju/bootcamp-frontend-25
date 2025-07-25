@@ -12,7 +12,7 @@ class IdCard extends HTMLElement {
     container.style.flexDirection = "column";
     container.style.alignItems = "center";
     container.style.justifyContent = "space-between";
-    container.style.width = "300px";
+    // container.style.width = "300px";
 
     const header = document.createElement("div");
     header.style.width = "100%";
@@ -44,7 +44,7 @@ class IdCard extends HTMLElement {
     name.style.textAlign = "center";
     name.style.color = "white";
     name.style.fontWeight = "900";
-    name.style.fontSize = "2rem";
+    name.style.fontSize = "10vw";
     body.appendChild(name);
 
     const footer = document.createElement("div");
@@ -57,7 +57,7 @@ class IdCard extends HTMLElement {
     role.style.textAlign = "center";
     role.style.color = "white";
     role.style.fontWeight = "900";
-    role.style.fontSize = "2rem";
+    role.style.fontSize = "10vw";
     role.style.margin = "5%";
     footer.appendChild(role);
 
