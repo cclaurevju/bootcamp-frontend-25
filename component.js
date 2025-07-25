@@ -12,6 +12,7 @@ class IdCard extends HTMLElement {
     container.style.flexDirection = "column";
     container.style.alignItems = "center";
     container.style.justifyContent = "space-between";
+    container.style.width = "300px";
 
     const header = document.createElement("div");
     header.style.width = "100%";
