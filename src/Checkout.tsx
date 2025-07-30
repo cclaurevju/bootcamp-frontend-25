@@ -29,6 +29,8 @@ const Product = ({
   price,
   orderedQuantity,
   total,
+  handleAddProduct,
+  handleRemoveProduct,
 }) => {
   return (
     <tr>
@@ -39,8 +41,20 @@ const Product = ({
       <td>{orderedQuantity}</td>
       <td>${total}</td>
       <td>
-        <button className={styles.actionButton}>+</button>
-        <button className={styles.actionButton}>-</button>
+        <button
+          className={styles.actionButton}
+          onClick={handleAddProduct}
+          disabled={orderedQuantity == availableCount}
+        >
+          +
+        </button>
+        <button
+          className={styles.actionButton}
+          onClick={handleRemoveProduct}
+          disabled={orderedQuantity == 0}
+        >
+          -
+        </button>
       </td>
     </tr>
   );
@@ -48,15 +62,67 @@ const Product = ({
 
 const initialState = {
   products: [],
+  total: 0,
 };
 
 const reducer = (state, action) => {
+  console.log("prev", state, "action", action);
+
   switch (action.type) {
     case "FETCH_PRODUCTS": {
       const { products } = action.payload;
       return {
         ...state,
-        products: [...products],
+        products: products.map((p) => {
+          return {
+            ...p,
+            total: 0,
+            orderedQuantity: 0,
+          };
+        }),
+      };
+    }
+    case "ADD_PRODUCT": {
+      const { product } = action.payload;
+      const auxState = {
+        ...state,
+        products: [
+          ...state.products.map((p) => {
+            if (p.id == product.id) {
+              return {
+                ...p,
+                orderedQuantity: product.orderedQuantity + 1,
+                total: p.price * (product.orderedQuantity + 1),
+              };
+            }
+            return p;
+          }),
+        ],
+      };
+      return {
+        ...auxState,
+        total: auxState.products.reduce((total, p) => total + p.total, 0),
+      };
+    }
+    case "REMOVE_PRODUCT": {
+      const { product } = action.payload;
+      const auxState = {
+        ...state,
+        total: state.total - product.price,
+        products: state.products.map((p) => {
+          if (p.id == product.id) {
+            return {
+              ...p,
+              orderedQuantity: product.orderedQuantity - 1,
+              total: p.price * (product.orderedQuantity - 1),
+            };
+          }
+          return p;
+        }),
+      };
+      return {
+        ...auxState,
+        total: auxState.products.reduce((total, p) => total + p.total, 0),
       };
     }
 
@@ -77,6 +143,14 @@ const Checkout = () => {
         dispatch({ type: "FETCH_PRODUCTS", payload: { products: res } });
       });
   }, []);
+
+  const handleAddProduct = (product) => {
+    dispatch({ type: "ADD_PRODUCT", payload: { product } });
+  };
+  const handleRemoveProduct = (product) => {
+    dispatch({ type: "REMOVE_PRODUCT", payload: { product } });
+  };
+
   return (
     <div>
       <header className={styles.header}>
@@ -99,14 +173,18 @@ const Checkout = () => {
             </thead>
             <tbody>
               {state.products.map((product) => {
+                // if (!product) return null;
                 return (
                   <Product
+                    key={product.id}
                     id={product.id}
                     name={product.name}
                     price={product.price}
-                    total={product.availableCount}
+                    total={product.total}
                     availableCount={product.availableCount}
-                    orderedQuantity={0}
+                    orderedQuantity={product.orderedQuantity}
+                    handleAddProduct={() => handleAddProduct(product)}
+                    handleRemoveProduct={() => handleRemoveProduct(product)}
                   />
                 );
               })}
@@ -118,7 +196,7 @@ const Checkout = () => {
 
         <h2>Order summary</h2>
         <p>Discount: $ </p>
-        <p>Total: $ </p>
+        <p>{`Total: $${state.total} `}</p>
       </main>
     </div>
   );
